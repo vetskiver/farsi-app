@@ -1,0 +1,48 @@
+---
+alwaysApply: false
+---
+Use Supabase for user login and signup with email and password.
+
+Use Supabase to store vocabulary, cloze sentences, and user progress.
+
+The vocabulary table should have:
+
+id, user_id, english, farsi, cloze_sentence, created_at, updated_at.
+
+Create three study modes:
+
+English → Farsi
+
+Farsi → English
+
+Cloze Mode (sentence with a missing word).
+
+Let users add, edit, and delete vocabulary words.
+
+Use the OpenAI API to generate cloze sentences through a Supabase Edge Function.
+
+Save practice stats:
+
+Number of reviews
+
+Correct/incorrect answers
+
+Last review date
+
+Keep the design simple and uncluttered so users can review words quickly.
+
+Add keyboard shortcuts for faster practice.
+
+Deploy to Vercel and store Supabase + OpenAI keys in environment variables.
+
+Build the app in stages:
+
+Authentication
+
+Vocabulary management (CRUD)
+
+Flashcard modes
+
+AI features.
+
+Keep all AI calls secure by running them on the backend through serverless functions.

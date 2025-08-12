@@ -1,39 +1,38 @@
 import './App.css'
 import { testConnection } from './lib/supabase.js'
+import { AuthProvider, useAuth } from './contexts/AuthContext.jsx'
 
-function App() {
+function AppContent() {
+  const { user, loading, signOut } = useAuth()
 
-  const handleTest = async () => {
-    console.log('Testing Supabase connection...')
-    const result = await testConnection()
-    if (result) {
-      alert('✅ Supabase connection successful!')
-    } else {
-      alert('❌ Supabase connection failed. Check console for details.')
-    }
+  // Show loading while checking authentication
+  if (loading) {
+    return <div>Loading...</div>
   }
 
+  // Show different content based on authentication states
+  if (user) {
+    return (
+      <div>
+        <h1>Welcome, {user.email}!</h1>
+        <button onClick={signOut}>Sign out</button>
+        <p>You are logged in! Dashboard coming soon...</p>
+      </div>
+    )
+  }
   return (
-    <div className="App">
-      <h1>English-Farsi Flashcards</h1>
-      <p>Welcome to your language learning app! 🚀</p>
-
-      {/* Test Button*/}
-      <button
-        onClick={handleTest}
-        style = {{
-          padding: '10px 20px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          marginTop: '20px'
-        }}
-      >
-        Test Supabase Connection
-      </button>
+    <div>
+      <h1>Farsi Flashcards App</h1>
+      <p>Please log in to continue</p>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   )
 }
 
